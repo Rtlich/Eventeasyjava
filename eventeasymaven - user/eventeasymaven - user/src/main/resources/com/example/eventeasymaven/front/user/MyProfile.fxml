@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="800.0" prefHeight="500.0" style="-fx-background-color: #EEEEEE;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.eventeasymaven.controllers.front.user.MyProfileController">
+    <AnchorPane style="-fx-background-color: #F6BDB3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <StackPane prefHeight="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0">
+            <Text fx:id="topText" boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Mon profil" textAlignment="JUSTIFY" textOrigin="CENTER">
+                <font>
+                    <Font name="Arial Bold" size="23.0" />
+                </font>
+            </Text>
+        </StackPane>
+            <Button alignment="CENTER" layoutX="662.0" layoutY="21.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifierPassword" styleClass="form-control-white" text="Reset password" AnchorPane.rightAnchor="40.0" />
+    </AnchorPane>
+    <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+        <AnchorPane stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+            <AnchorPane layoutX="30.0" layoutY="30.0" style="-fx-background-color: white;" styleClass="window-rounded" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                <effect>
+                    <DropShadow blurType="GAUSSIAN" color="#00000033" height="50.0" radius="24.5" width="50.0" />
+                </effect>
+                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <VBox.margin>
+                            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        </VBox.margin>
+
+                        <VBox alignment="CENTER_LEFT" spacing="30.0" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </HBox.margin>
+                            <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <HBox.margin>
+                                        <Insets right="30.0" />
+                                    </HBox.margin>
+                                    <Image url="@../../images/email.png" />
+                                </ImageView>
+                                <Text fx:id="emailText" text="Email" wrappingWidth="190">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Text>
+                                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifierEmail" styleClass="form-control-white" text="Modifier" />
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <HBox.margin>
+                                        <Insets right="30.0" />
+                                    </HBox.margin>
+                                    <Image url="@../../images/firstname.png" />
+                                </ImageView>
+                                <Text fx:id="fnameText" text="Fname" wrappingWidth="190">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Text>
+                                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifierFname" styleClass="form-control-white" text="Modifier" />
+                            </HBox>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" spacing="30.0" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </HBox.margin>
+                            <HBox alignment="CENTER_LEFT" fillHeight="false" VBox.vgrow="NEVER">
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                                    <HBox.margin>
+                                        <Insets right="30.0" />
+                                    </HBox.margin>
+                                    <Image url="@../../images/phone.png" />
+                                </ImageView>
+                                <Text fx:id="phonenumberText" text="Phonenumber" wrappingWidth="190" HBox.hgrow="NEVER">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Text>
+                                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifierPhone" styleClass="form-control-white" text="Modifier" />
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                                    <HBox.margin>
+                                        <Insets right="30.0" />
+                                    </HBox.margin>
+                                    <Image url="@../../images/lastname.png" />
+                                </ImageView>
+                                <Text fx:id="lnameText" text="Lname" wrappingWidth="190">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Text>
+                                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifierLname" styleClass="form-control-white" text="Modifier" />
+                            </HBox>
+
+                        </VBox>
+                    </HBox>
+                    <HBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS" />
+                </VBox>
+            </AnchorPane>
+        </AnchorPane>
+    </ScrollPane>
+</AnchorPane>
