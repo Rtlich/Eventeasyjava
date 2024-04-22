@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.eventeasy.controllers.LoginController">
+
+    <styleClass>
+        <String fx:value="window-rounded" />
+        <String fx:value="background-white" />
+    </styleClass>
+    <AnchorPane layoutX="40.0" layoutY="20.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <StackPane layoutY="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
+        <HBox alignment="CENTER" layoutY="441.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="550.0" />
+      <Button layoutX="196.0" layoutY="267.0" mnemonicParsing="false" onAction="#front" styleClass="signup-button" text="USER" textFill="#343a40">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="196.0" layoutY="376.0" mnemonicParsing="false" onAction="#back" styleClass="signup-button" text="ADMIN" textFill="#343a40">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+    </AnchorPane>
+    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="500.0" styleClass="background-white" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <StackPane layoutX="38.0" layoutY="180.0" styleClass="bg-primary" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+               <ImageView fitHeight="200.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                   <Image url="@images/logo.png" />
+               </ImageView>
+         </children>
+        </StackPane>
+    </AnchorPane>
+</AnchorPane>

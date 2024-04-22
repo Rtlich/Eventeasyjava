@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane layoutX="30.0" layoutY="30.0" style="-fx-background-color: white;" styleClass="window-rounded" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+        <effect>
+            <DropShadow blurType="GAUSSIAN" color="#00000033" height="50.0" radius="24.5" width="50.0" />
+        </effect>
+        <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <StackPane prefHeight="150.0" prefWidth="150.0">
+                <children>
+                    <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../images/event.jpg" />
+                        </image>
+                    </ImageView>
+                </children>
+            </StackPane>
+            <VBox HBox.hgrow="ALWAYS">
+                <children>
+                    <HBox>
+                        <children>
+
+                            <VBox spacing="10.0">
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../images/firstname.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text fx:id="titleText" text="Title" wrappingWidth="190">
+                                            <font>
+                                                <Font name="System Bold" size="15.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="20.0" />
+                                            </HBox.margin>
+                                        </Text>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../images/phone.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text fx:id="phoneText" text="Phone" wrappingWidth="190">
+                                            <font>
+                                                <Font name="System Bold" size="15.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="20.0" />
+                                            </HBox.margin>
+                                        </Text>
+                                    </children>
+                                </HBox>
+
+
+                            </VBox>
+                            <VBox spacing="10.0">
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../images/email.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text fx:id="emailText" text="Email" wrappingWidth="190">
+                                            <font>
+                                                <Font name="System Bold" size="15.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="20.0" />
+                                            </HBox.margin>
+                                        </Text>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../images/mdi/date.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text fx:id="dateText" text="Date" wrappingWidth="190">
+                                            <font>
+                                                <Font name="System Bold" size="15.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="20.0" />
+                                            </HBox.margin>
+                                        </Text>
+                                    </children>
+                                </HBox>
+
+                            </VBox>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER">
+                        <children>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../images/mdi/category.png" />
+                                </image>
+                            </ImageView>
+
+                            <Text fx:id="categoryText" text="Category">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </Text>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="15.0" />
+                        </VBox.margin>
+                    </HBox>
+                </children>
+            </VBox>
+
+            <VBox>
+                <HBox.margin>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </HBox.margin>
+                <Button fx:id="editButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="light-button" text="Modifier">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="deleteButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="light-button" text="Supprimer">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+            </VBox>
+
+        </HBox>
+    </AnchorPane>
+</AnchorPane>
