@@ -1,0 +1,20 @@
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controllers.ModifyCategory"
+            prefHeight="200.0" prefWidth="400.0">
+    <children>
+        <VBox spacing="10" layoutX="100" layoutY="50">
+            <!-- Label for the name field -->
+            <Label text="Category Name:"/>
+            <!-- TextField for modifying the category name -->
+            <TextField fx:id="nameField"/>
+            <!-- Save button -->
+            <Button text="Save" onAction="#save"/>
+        </VBox>
+    </children>
+</AnchorPane>

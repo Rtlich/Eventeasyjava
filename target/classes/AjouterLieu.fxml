@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="752.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjouterLieu">
+   <children>
+      <BorderPane prefHeight="439.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox prefHeight="597.0" prefWidth="172.0" style="-fx-background-color: #e6dddf;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="115.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/Monogram__preview.png" />
+                     </image>
+
+                     <VBox.margin>
+                        <Insets left="15.0" top="25.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="192.0" style="-fx-background-color: #e6dddf;" styleClass="button3" stylesheets="css/!--HTML!--.css" text="All Categories">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/menu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #e6dddf;" styleClass="button3" stylesheets="css/!--HTML!--.css" text="All Places">
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/tool.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="192.0" style="-fx-background-color: #e6dddf;" styleClass="button3" stylesheets="css/!--HTML!--.css" text="Reservations">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/reservation.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </left>
+         <center>
+            <Pane prefHeight="377.0" prefWidth="185.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutX="275.0" layoutY="34.0" text="Add Place" textFill="#f6bdb3">
+                     <font>
+                        <Font size="42.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="60.0" layoutY="34.0" prefHeight="662.0" prefWidth="561.0" spacing="15.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Place Name">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="LName" prefHeight="25.0" prefWidth="521.0" promptText="Nom " style="-fx-background-color: #FFFFFF;" styleClass="button4" stylesheets="css/!--HTML!--.css">
+                           <VBox.margin>
+                              <Insets bottom="15.0" right="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox prefHeight="39.0" prefWidth="547.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="52.109375">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="5.5" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="lPrix" prefHeight="25.0" prefWidth="216.0" promptText="Price" style="-fx-background-color: #FFFFFF;" styleClass="button4" stylesheets="css/!--HTML!--.css">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="15.0" top="5.5" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="lCapacity" prefHeight="25.0" prefWidth="232.0" promptText="Capacity" style="-fx-background-color: #FFFFFF;" styleClass="button4" stylesheets="css/!--HTML!--.css">
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Region">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="lRegion" prefHeight="25.0" prefWidth="167.0" promptText="Region" style="-fx-background-color: #FFFFFF;" styleClass="button4" stylesheets="css/!--HTML!--.css">
+                           <VBox.margin>
+                              <Insets right="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <AnchorPane prefHeight="152.0" prefWidth="456.0">
+                           <children>
+                              <Button fx:id="btnImage" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" onAction="#addImage" prefHeight="25.0" prefWidth="101.0" text="Upload Image" />
+                              <ImageView fx:id="imagL" fitHeight="127.0" fitWidth="101.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <DatePicker fx:id="dateD" promptText="Start Date" />
+                        <DatePicker fx:id="dateF" promptText="End Date" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <ChoiceBox fx:id="lCategory" prefWidth="150.0" />
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#addLieu" prefHeight="28.0" prefWidth="80.0" style="-fx-background-color: #e6dddf;" styleClass="button4" stylesheets="css/!--HTML!--.css" text="Save">
+                           <VBox.margin>
+                              <Insets left="25.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="14.0" top="50.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+      <HBox layoutX="4.0" layoutY="28.0" prefHeight="97.0" prefWidth="196.0" />
+   </children>
+</AnchorPane>
