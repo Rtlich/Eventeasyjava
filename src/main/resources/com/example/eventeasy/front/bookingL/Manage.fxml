@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane styleClass="background-white" stylesheets="@../../MainStyle.css"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.eventeasy.controllers.front.bookingL.ManageController">
+    <StackPane layoutY="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Text fx:id="topText" strokeType="OUTSIDE" strokeWidth="0.0" text="texte haut">
+            <font>
+                <Font name="Arial Bold" size="23.0"/>
+            </font>
+        </Text>
+    </StackPane>
+    <VBox layoutX="50.0" layoutY="80.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0"
+          AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+
+        <HBox>
+
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prix :">
+                    <font>
+                        <Font name="Arial" size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets left="5.0"/>
+                    </VBox.margin>
+                </Text>
+                <TextField fx:id="prixTF" alignment="TOP_LEFT" promptText="Saisir prix" styleClass="form-control"/>
+            </VBox>
+
+
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DateD :">
+                    <font>
+                        <Font name="Arial" size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets left="5.0"/>
+                    </VBox.margin>
+                </Text>
+                <DatePicker fx:id="dateDDP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                            minHeight="-Infinity" minWidth="-Infinity" styleClass="form-control"/>
+
+            </VBox>
+
+        </HBox>
+
+        <HBox>
+
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DateF :">
+                    <font>
+                        <Font name="Arial" size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets left="5.0"/>
+                    </VBox.margin>
+                </Text>
+                <DatePicker fx:id="dateFDP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                            minHeight="-Infinity" minWidth="-Infinity" styleClass="form-control"/>
+
+            </VBox>
+
+
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status :">
+                    <font>
+                        <Font name="Arial" size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets left="5.0"/>
+                    </VBox.margin>
+                </Text>
+                <TextField fx:id="statusTF" alignment="TOP_LEFT" promptText="Saisir status" styleClass="form-control"/>
+            </VBox>
+
+        </HBox>
+
+
+    </VBox>
+    <Button fx:id="btnAjout" layoutX="265.0" layoutY="434.0" mnemonicParsing="false" onAction="#manage"
+            prefHeight="51.0" prefWidth="150.0" styleClass="success-button" text="manipulation" textAlignment="CENTER"
+            textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="260.0"
+            AnchorPane.rightAnchor="260.0"/>
+</AnchorPane>
