@@ -26,8 +26,7 @@ public class ManageController implements Initializable {
     public DatePicker dateDDP;
     @FXML
     public DatePicker dateFDP;
-    @FXML
-    public TextField statusTF;
+
 
 
     @FXML
@@ -51,7 +50,6 @@ public class ManageController implements Initializable {
                 prixTF.setText(String.valueOf(currentBookingL.getPrix()));
                 dateDDP.setValue(currentBookingL.getDateD());
                 dateFDP.setValue(currentBookingL.getDateF());
-                //statusTF.setText(currentBookingL.getStatus());
 
 
             } catch (NullPointerException ignored) {
@@ -72,7 +70,6 @@ public class ManageController implements Initializable {
             bookingL.setPrix(Float.parseFloat(prixTF.getText()));
             bookingL.setDateD(dateDDP.getValue());
             bookingL.setDateF(dateFDP.getValue());
-            //bookingL.setStatus(statusTF.getText());
 
 
             if (currentBookingL == null) {
@@ -95,51 +92,46 @@ public class ManageController implements Initializable {
 
         }
     }
-
-
     private boolean controleDeSaisie() {
 
-
         if (prixTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("prix ne doit pas etre vide");
+            AlertUtils.makeInformation("Le prix ne doit pas être vide");
             return false;
         }
-
 
         try {
-            Float.parseFloat(prixTF.getText());
-        } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("prix doit etre un réel");
+            float prix = Float.parseFloat(prixTF.getText());
+
+            LocalDate debut = null;
+            LocalDate fin = null;
+
+            try {
+                debut = dateDDP.getValue();
+                fin = dateFDP.getValue();
+            } catch (Exception e) {
+                e.printStackTrace();
+                AlertUtils.makeInformation("Veuillez sélectionner une date valide");
+                return false;
+            }
+
+
+
+            if (debut.isBefore(LocalDate.now())) {
+                AlertUtils.makeInformation("La date de début doit être égale ou postérieure à la date d'aujourd'hui");
+                return false;
+            }
+
+            if (fin.isBefore(debut)) {
+                AlertUtils.makeInformation("La date de fin doit être postérieure à la date de début");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            AlertUtils.makeInformation("Le prix doit être un nombre réel");
             return false;
         }
-
-
-
-
-
-        if (dateDDP.getValue() == null || dateDDP.getValue().isBefore(LocalDate.now())) {
-            AlertUtils.makeInformation("La date de début doit être postérieure à la date d'aujourd'hui");
-            return false;
-        }
-
-        if (dateFDP.getValue() == null || dateFDP.getValue().isBefore(LocalDate.now())) {
-            AlertUtils.makeInformation("La date de fin doit être postérieure à la date d'aujourd'hui");
-            return false;
-        }
-
-
-
-
-
-
-
-
-        if (statusTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("status ne doit pas etre vide");
-            return false;
-        }
-
 
         return true;
     }
+
+
 }

@@ -149,35 +149,47 @@ public class ManageController implements Initializable {
         idRess.setText(String.valueOf(lieub_id));
     }
 
-
     private boolean controleDeSaisie() {
-
-
         if (prixTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("prix ne doit pas etre vide");
+            AlertUtils.makeInformation("Le prix ne doit pas être vide");
             return false;
         }
-
 
         try {
             Float.parseFloat(prixTF.getText());
         } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("prix doit etre un réel");
-            return false;
-        }
-        if (dateDDP.getValue() == null) {
-            AlertUtils.makeInformation("Choisir une date pour dateD");
+            AlertUtils.makeInformation("Le prix doit être un réel");
             return false;
         }
 
+        if (dateDDP.getValue() == null) {
+            AlertUtils.makeInformation("Veuillez choisir une date de début");
+            return false;
+        }
 
         if (dateFDP.getValue() == null) {
-            AlertUtils.makeInformation("Choisir une date pour dateF");
+            AlertUtils.makeInformation("Veuillez choisir une date de fin");
             return false;
         }
 
-        return true;
+        if (dateDDP.getValue().isBefore(LocalDate.now())) {
+            AlertUtils.makeInformation("La date de début doit être aujourd'hui ou ultérieure");
+            return false;
+        }
+
+        Lieu lieu = LieuService.getInstance().getLieuById(Integer.parseInt(idRess.getText()));
+        if (lieu != null &&
+                !dateDDP.getValue().isBefore(lieu.getDateD()) &&
+                !dateFDP.getValue().isBefore(dateDDP.getValue()) &&
+                !dateFDP.getValue().isAfter(lieu.getDateF())) {
+
+            return true;
+        } else {
+            AlertUtils.makeInformation("La réservation doit être dans l'intervalle de disponibilité du lieu et après la date d'aujourd'hui");
+            return false;
+        }
     }
+
     private void closeWindow() {
         Stage stage = (Stage) btnAjout.getScene().getWindow();
         stage.close();

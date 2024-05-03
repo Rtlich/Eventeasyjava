@@ -2,6 +2,12 @@ module com.example.eventeasy {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires com.gluonhq.maps;
+
+
+
+
+
 
     opens com.example.eventeasy to javafx.fxml;
     opens com.example.eventeasy.entities to javafx.fxml;
@@ -24,4 +30,8 @@ module com.example.eventeasy {
     exports com.example.eventeasy.controllers.back.bookingL;
     exports com.example.eventeasy.controllers.back.categoryL;
     exports com.example.eventeasy.controllers.back.lieu;
+
+
+
+
 }

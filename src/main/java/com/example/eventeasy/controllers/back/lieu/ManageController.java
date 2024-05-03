@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ManageController implements Initializable {
@@ -155,66 +156,78 @@ public class ManageController implements Initializable {
 
     private boolean controleDeSaisie() {
 
-
         if (nomTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("nom ne doit pas etre vide");
+            AlertUtils.makeInformation("Le nom ne doit pas être vide");
             return false;
         }
 
+        if (nomTF.getText().matches(".*\\d.*")) {
+            AlertUtils.makeInformation("Le nom ne doit pas contenir de chiffres");
+            return false;
+        }
 
         if (prixTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("prix ne doit pas etre vide");
+            AlertUtils.makeInformation("Le prix ne doit pas être vide");
             return false;
         }
-
 
         try {
             Float.parseFloat(prixTF.getText());
         } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("prix doit etre un réel");
+            AlertUtils.makeInformation("Le prix doit être un nombre réel");
             return false;
         }
+
         if (selectedImagePath == null) {
             AlertUtils.makeInformation("Veuillez choisir une image");
             return false;
         }
 
-
         if (dateDDP.getValue() == null) {
-            AlertUtils.makeInformation("Choisir une date pour dateD");
+            AlertUtils.makeInformation("Veuillez choisir une date pour la date de début");
             return false;
         }
-
 
         if (dateFDP.getValue() == null) {
-            AlertUtils.makeInformation("Choisir une date pour dateF");
+            AlertUtils.makeInformation("Veuillez choisir une date pour la date de fin");
             return false;
         }
 
+        LocalDate today = LocalDate.now();
+        if (dateDDP.getValue().isBefore(today)) {
+            AlertUtils.makeInformation("La date de début doit être aujourd'hui ou ultérieure");
+            return false;
+        }
+
+        if (dateFDP.getValue().isBefore(dateDDP.getValue())) {
+            AlertUtils.makeInformation("La date de fin doit être postérieure à la date de début");
+            return false;
+        }
 
         if (capacityTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("capacity ne doit pas etre vide");
+            AlertUtils.makeInformation("La capacité ne doit pas être vide");
             return false;
         }
-
 
         try {
             Integer.parseInt(capacityTF.getText());
         } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("capacity doit etre un nombre");
+            AlertUtils.makeInformation("La capacité doit être un nombre entier");
             return false;
         }
 
         if (regionTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("region ne doit pas etre vide");
+            AlertUtils.makeInformation("La région ne doit pas être vide");
             return false;
         }
-
 
         if (categoryCB.getValue() == null) {
-            AlertUtils.makeInformation("Veuillez choisir un category");
+            AlertUtils.makeInformation("Veuillez choisir une catégorie");
             return false;
         }
+
         return true;
     }
+
+
 }

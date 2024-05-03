@@ -24,7 +24,7 @@ public class Constants {
     public static final String FXML_BACK_DISPLAY_ALL_CATEGORY_L = PACKAGE_NAME + "/back/categoryL/ShowAll.fxml" ;
     public static final String FXML_BACK_MODEL_CATEGORY_L = PACKAGE_NAME + "/back/categoryL/Model.fxml" ;
     public static final String FXML_BACK_MANAGE_CATEGORY_L = PACKAGE_NAME + "/back/categoryL/Manage.fxml" ;
-    public static final String FXML_FRONT_DISPLAY_ALL_CATEGORY_L = PACKAGE_NAME + "/front/categoryL/ShowAll.fxml" ;
+    public static final String FXML_FRONT_DISPLAY_ALL_CATEGORY_L = PACKAGE_NAME + "/front/lieu/Map.fxml" ;
     //public static final String FXML_FRONT_MODEL_CATEGORY_L = PACKAGE_NAME + "/front/categoryL/Model.fxml" ;
     //public static final String FXML_FRONT_MANAGE_CATEGORY_L = PACKAGE_NAME + "/front/categoryL/Manage.fxml" ;
 
