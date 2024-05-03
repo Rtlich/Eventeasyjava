@@ -7,15 +7,22 @@ import com.example.eventeasy.entities.Lieu;
 import com.example.eventeasy.services.LieuService;
 import com.example.eventeasy.utils.AlertUtils;
 import com.example.eventeasy.utils.Constants;
+import com.gluonhq.maps.MapLayer;
+import com.gluonhq.maps.MapPoint;
+import com.gluonhq.maps.MapView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
@@ -24,6 +31,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class ManageController implements Initializable {
@@ -44,6 +52,9 @@ public class ManageController implements Initializable {
     public TextField regionTF;
 
     @FXML
+    private VBox map;
+
+    @FXML
     public ComboBox<CategoryL> categoryCB;
 
     @FXML
@@ -51,12 +62,18 @@ public class ManageController implements Initializable {
     @FXML
     public Text topText;
 
+
+    private MapView mapView;
+    private MapPoint selectedPoint;
+
     Lieu currentLieu;
     Path selectedImagePath;
     boolean imageEdited;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+
 
         for (CategoryL category : LieuService.getInstance().getAllCategorys()) {
             categoryCB.getItems().add(category);
@@ -106,6 +123,9 @@ public class ManageController implements Initializable {
             lieu.setDateF(dateFDP.getValue());
             lieu.setCapacity(Integer.parseInt(capacityTF.getText()));
             lieu.setRegion(regionTF.getText());
+
+            lieu.setLongitude(selectedPoint.getLongitude());
+            lieu.setLatitude(selectedPoint.getLatitude());
 
             lieu.setCategory(categoryCB.getValue());
 
@@ -228,6 +248,8 @@ public class ManageController implements Initializable {
 
         return true;
     }
+
+
 
 
 }

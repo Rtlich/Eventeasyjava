@@ -82,7 +82,7 @@ public class LieuService {
     public boolean add(Lieu lieu) {
 
 
-        String request = "INSERT INTO `lieu`(`nom`, `prix`, `image`, `date_d`, `date_f`, `capacity`, `region`, `category_id`) VALUES(?, ?, ?, ?, ?, ?, ?, ?)" ;
+        String request = "INSERT INTO `lieu`(`nom`, `prix`, `image`, `date_d`, `date_f`, `capacity`, `region`, `category_id`,`longitude`, `latitude`) VALUES(?, ?, ?, ?, ?, ?, ?, ?,?,?)" ;
 
         try {
             preparedStatement = connection.prepareStatement(request);
@@ -96,6 +96,9 @@ public class LieuService {
             preparedStatement.setString(7, lieu.getRegion());
 
             preparedStatement.setInt(8, lieu.getCategory().getId());
+
+            preparedStatement.setDouble(9, lieu.getLongitude());
+            preparedStatement.setDouble(10, lieu.getLatitude());
 
 
             preparedStatement.executeUpdate();
