@@ -3,6 +3,8 @@ module com.example.eventeasy {
     requires javafx.fxml;
     requires java.sql;
     requires com.gluonhq.maps;
+    requires com.calendarfx.view; // Ajout de la dépendance à CalendarFX
+
 
 
 

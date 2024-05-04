@@ -124,8 +124,8 @@ public class ManageController implements Initializable {
             lieu.setCapacity(Integer.parseInt(capacityTF.getText()));
             lieu.setRegion(regionTF.getText());
 
-            lieu.setLongitude(selectedPoint.getLongitude());
-            lieu.setLatitude(selectedPoint.getLatitude());
+            //lieu.setLongitude(selectedPoint.getLongitude());
+            //lieu.setLatitude(selectedPoint.getLatitude());
 
             lieu.setCategory(categoryCB.getValue());
 

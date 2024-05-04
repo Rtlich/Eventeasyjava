@@ -96,6 +96,12 @@ public class MainWindowController implements Initializable {
         btnCategoryLs.setTextFill(COLOR_PRIMARY);
         Animations.animateButton(btnCategoryLs, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
+    @FXML
+    private void afficherCalendar(ActionEvent ignored) {
+        goToLink(Constants.FXML_FRONT_DISPLAY_ALL_CALENDAR);
+
+        btnCategoryLs.setTextFill(COLOR_PRIMARY);
+        Animations.animateButton(btnCategoryLs, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);}
 
     @FXML
     private void afficherLieus(ActionEvent ignored) {
