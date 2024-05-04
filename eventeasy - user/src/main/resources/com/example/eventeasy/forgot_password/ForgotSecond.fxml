@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import java.lang.String?>
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="500.0" style="-fx-background-color: white"
+            stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.eventeasy.controllers.forgot_password.ForgotSecondController">
+
+    <styleClass>
+        <String fx:value="window-rounded"/>
+        <String fx:value="background-white"/>
+    </styleClass>
+    <StackPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation" textAlignment="CENTER">
+            <font>
+                <Font name="Segoe UI" size="30.0"/>
+            </font>
+        </Text>
+    </StackPane>
+    <TextField fx:id="inputResetCode" layoutX="40.0" layoutY="189.0" prefHeight="50.0"
+               promptText="Tapez le code de reinitialisation" styleClass="form-control" AnchorPane.leftAnchor="40.0"
+               AnchorPane.rightAnchor="40.0"/>
+    <Button layoutX="40.0" layoutY="272.0" mnemonicParsing="false" onAction="#next" prefHeight="50.0"
+            styleClass="success-button" text="Suivant" textFill="WHITE" AnchorPane.leftAnchor="40.0"
+            AnchorPane.rightAnchor="40.0"/>
+    <HBox alignment="CENTER" layoutY="420.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+        <Button mnemonicParsing="false" onAction="#backToLogin" styleClass="signup-button"
+                text="Revenir a l'ecran de connexion" textFill="#343a40">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Button>
+    </HBox>
+    <Text layoutX="40.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code de reinitialisation"/>
+</AnchorPane>

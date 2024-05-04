@@ -1,0 +1,162 @@
+package com.example.eventeasy.controllers;
+
+import com.example.eventeasy.MainApp;
+import com.example.eventeasy.entities.User;
+import com.example.eventeasy.entities.UserRole;
+import com.example.eventeasy.services.UserService;
+import com.example.eventeasy.utils.AlertUtils;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import nl.captcha.Captcha;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
+public class RegisterController implements Initializable {
+
+    @FXML
+    public TextField emailTF;
+    @FXML
+    public TextField passwordTF;
+    @FXML
+    public TextField fnameTF;
+    @FXML
+    public TextField lnameTF;
+    @FXML
+    public TextField phonenumberTF;
+    @FXML
+    public Button btnAjout;
+    @FXML
+    public ImageView captchaIV;
+    @FXML
+    public TextField captchaTF;
+    @FXML
+    public Text topText;
+
+    Captcha captcha;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        setCaptcha();
+
+        topText.setText("Inscription");
+        btnAjout.setText("S'inscrire");
+    }
+
+    @FXML
+    private void manage(ActionEvent ignored) {
+
+        if (controleDeSaisie()) {
+
+            User user = new User(
+                    emailTF.getText(),
+                    passwordTF.getText(),
+                    fnameTF.getText(),
+                    lnameTF.getText(),
+                    Integer.parseInt(phonenumberTF.getText()),
+                    UserRole.User,
+                    true
+            );
+
+            if (UserService.getInstance().add(user)) {
+                AlertUtils.makeSuccessNotification("Inscription effectué avec succés");
+                MainApp.getInstance().loadLogin();
+            } else {
+                AlertUtils.makeError("Existe");
+            }
+        }
+    }
+
+
+    @FXML
+    public void connexion(ActionEvent ignored) {
+        MainApp.getInstance().loadLogin();
+    }
+
+    private boolean controleDeSaisie() {
+
+        if (!captcha.isCorrect(captchaTF.getText())) {
+            AlertUtils.makeInformation("Captcha invalide");
+            return false;
+        }
+
+        if (emailTF.getText().isEmpty()) {
+            AlertUtils.makeInformation("Email ne doit pas etre vide");
+            return false;
+        }
+        if (!Pattern.compile("^(.+)@(.+)$").matcher(emailTF.getText()).matches()) {
+            AlertUtils.makeInformation("Email invalide");
+            return false;
+        }
+
+        if (passwordTF.getText().isEmpty()) {
+            AlertUtils.makeInformation("Mot de passe ne doit pas etre vide");
+            return false;
+        }
+        if (!isValidPassword(passwordTF.getText())) {
+            AlertUtils.makeInformation("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.");
+            return false;
+        }
+
+        if (fnameTF.getText().isEmpty() || !Pattern.matches("[a-zA-Z]+", fnameTF.getText())) {
+            AlertUtils.makeInformation("Le nom ne doit pas être vide et doit contenir uniquement des lettres.");
+            return false;
+        }
+
+        if (lnameTF.getText().isEmpty() || !Pattern.matches("[a-zA-Z]+", lnameTF.getText())) {
+            AlertUtils.makeInformation("Le prénom ne doit pas être vide et doit contenir uniquement des lettres.");
+            return false;
+        }
+
+        if (phonenumberTF.getText().isEmpty()) {
+            AlertUtils.makeInformation("Telephone ne doit pas etre vide");
+            return false;
+        }
+
+        if (phonenumberTF.getText().length() != 8) {
+            AlertUtils.makeInformation("Telephone doit avoir 8 chiffres");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(phonenumberTF.getText());
+        } catch (NumberFormatException ignored) {
+            AlertUtils.makeInformation("Telephone doit etre un nombre");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidPassword(String password) {
+        // Vérifie si le mot de passe contient au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        return Pattern.compile(passwordPattern).matcher(password).matches();
+    }
+
+    public void resetCaptcha(ActionEvent ignored) {
+        setCaptcha();
+        captchaTF.clear();
+    }
+
+
+    void setCaptcha() {
+        captcha = new Captcha.Builder(250, 200)
+                .addText()
+                .addBackground()
+                .addNoise()
+                .addBorder()
+                .build();
+
+        Image image = SwingFXUtils.toFXImage(captcha.getImage(), null);
+        captchaIV.setImage(image);
+    }
+}
