@@ -130,7 +130,7 @@ public class ManageController implements Initializable {
         try {
             Integer.parseInt(phoneTF.getText());
         } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("Le téléphone doit être un nombre");
+            AlertUtils.makeInformation("Le téléphone doit contenir que des chiffres");
             return false;
         }
 
