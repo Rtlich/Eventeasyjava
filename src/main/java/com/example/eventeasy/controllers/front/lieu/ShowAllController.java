@@ -13,9 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -38,15 +36,25 @@ public class ShowAllController implements Initializable {
 
     @FXML
     public Text topText;
-    @FXML
-    public Button addButton;
+
     @FXML
     public VBox mainVBox;
+    @FXML
+    public Button previousPageButton;
+    @FXML
+    public Button nextPageButton;
+    @FXML
+    public Label pageNumberLabel;
+    @FXML
+    private TextField searchTextField;
 
-    private Lieu selectedLieu;
 
 
     List<Lieu> listLieu;
+
+    private List<Lieu> displayedLieux;
+    private int currentPage = 1;
+    private int itemsPerPage = 2;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,13 +66,16 @@ public class ShowAllController implements Initializable {
     void displayData() {
         mainVBox.getChildren().clear();
 
+        int startIndex = (currentPage - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, listLieu.size());
+        displayedLieux = listLieu.subList(startIndex, endIndex);
+
+
         Collections.reverse(listLieu);
 
-        if (!listLieu.isEmpty()) {
-            for (Lieu lieu : listLieu) {
-
+        if (!displayedLieux.isEmpty()) {
+            for (Lieu lieu : displayedLieux) {
                 mainVBox.getChildren().add(makeLieuModel(lieu));
-
             }
         } else {
             StackPane stackPane = new StackPane();
@@ -73,6 +84,9 @@ public class ShowAllController implements Initializable {
             stackPane.getChildren().add(new Text("Aucune donnée"));
             mainVBox.getChildren().add(stackPane);
         }
+
+        updatePaginationButtons();
+
     }
 
     public Parent makeLieuModel(
@@ -127,12 +141,47 @@ public class ShowAllController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void goToPreviousPage(ActionEvent event) {
+        if (currentPage > 1) {
+            currentPage--;
+            displayData();
+        }
+    }
+    @FXML
+    private void goToNextPage(ActionEvent event) {
+        int maxPage = (int) Math.ceil((double) listLieu.size() / itemsPerPage);
+        if (currentPage < maxPage) {
+            currentPage++;
+            displayData();
+        }
+    }
+    private void updatePaginationButtons() {
+        int maxPage = (int) Math.ceil((double) listLieu.size() / itemsPerPage);
+        pageNumberLabel.setText("Page " + currentPage + " sur " + maxPage);
+
+        previousPageButton.setDisable(currentPage == 1);
+        nextPageButton.setDisable(currentPage == maxPage);
+    }
+    @FXML
+    private void searchLieux(ActionEvent event) {
+        String searchQuery = searchTextField.getText().trim().toLowerCase();
+        if (!searchQuery.isEmpty()) {
+            listLieu = LieuService.getInstance().searchByNom(searchQuery);
+        } else {
+            listLieu = LieuService.getInstance().getAll();
+        }
+        currentPage = 1;
+        displayData();
+    }
 
     @FXML
     private void ajouterLieu(ActionEvent ignored) {
         currentLieu = null;
         MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_MANAGE_LIEU);
     }
+
+
 
     /* private void modifierLieu(Lieu lieu) {
         currentLieu = lieu;

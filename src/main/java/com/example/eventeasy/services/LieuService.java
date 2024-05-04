@@ -193,5 +193,41 @@ public class LieuService {
         return lieu;
     }
 
+    public List<Lieu> searchByNom(String nom) {
+        List<Lieu> listLieu = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM `lieu` AS x " +
+                    "RIGHT JOIN `category_l` AS y1 ON x.category_id = y1.id " +
+                    "WHERE LOWER(x.nom) LIKE ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + nom + "%");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Lieu lieu = new Lieu();
+                lieu.setId(resultSet.getInt("id"));
+                lieu.setNom(resultSet.getString("nom"));
+                lieu.setPrix(resultSet.getFloat("prix"));
+                lieu.setImage(resultSet.getString("image"));
+                lieu.setDateD(resultSet.getDate("date_d") != null ? resultSet.getDate("date_d").toLocalDate() : null);
+                lieu.setDateF(resultSet.getDate("date_f") != null ? resultSet.getDate("date_f").toLocalDate() : null);
+                lieu.setCapacity(resultSet.getInt("capacity"));
+                lieu.setRegion(resultSet.getString("region"));
+
+                CategoryL category = new CategoryL();
+                category.setId(resultSet.getInt("y1.id"));
+                category.setNom(resultSet.getString("y1.nom"));
+                lieu.setCategory(category);
+
+                listLieu.add(lieu);
+            }
+        } catch (SQLException exception) {
+            System.out.println("Error (searchByNom) lieu : " + exception.getMessage());
+        }
+        return listLieu;
+    }
+
+
 
 }
