@@ -8,15 +8,18 @@ import com.example.eventeasy.services.BookingLService;
 import com.example.eventeasy.services.LieuService;
 import com.example.eventeasy.utils.AlertUtils;
 import com.example.eventeasy.utils.Constants;
+import com.twilio.exception.ApiException;
+import com.twilio.rest.api.v2010.account.Application;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import com.twilio.Twilio;
+
 
 
 import java.net.URL;
@@ -35,8 +38,6 @@ public class ManageController implements Initializable {
     public DatePicker dateDDP;
     @FXML
     public DatePicker dateFDP;
-    @FXML
-    public Label labelLieuName;
 
 
 
@@ -52,6 +53,24 @@ public class ManageController implements Initializable {
 
     BookingL currentBookingL;
     Lieu lieu; // Déclaration de la variable lieu
+
+
+    // Votre SID de compte Twilio
+    public static final String ACCOUNT_SID = "";
+
+    // Votre token d'authentification Twilio
+    public static final String AUTH_TOKEN = "";
+
+    // Le numéro Twilio
+    public static final String TWILIO_NUMBER = "";
+    @FXML
+    private TextField phoneNumberField;
+
+    @FXML
+    private TextField messageField;
+
+    @FXML
+    private Button SMSButton;
 
 
 
@@ -93,7 +112,49 @@ public class ManageController implements Initializable {
             }
         });
 
+        SMSButton = new Button("Send SMS");
+        SMSButton.setLayoutX(200);
+        SMSButton.setLayoutY(200);
+        SMSButton.getStyleClass().add("sms-button");
+        SMSButton.setOnAction(event -> sendSMS());
+
     }
+    public void sendSMS() {
+        String userPhoneNumber = phoneNumberField.getText();
+        String confirmationMessage = generateConfirmationMessage();
+        sendSMS(userPhoneNumber, confirmationMessage);
+    }
+    private void sendSMS(String toPhoneNumber, String message) {
+        if (message == null || message.isEmpty()) {
+            AlertUtils.makeError("Le message ne peut pas être vide");
+            return;
+        }
+
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message.creator(
+                        new PhoneNumber(toPhoneNumber),
+                        new PhoneNumber(TWILIO_NUMBER),
+                        message)
+                .create();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Confirmation de réservation");
+        alert.setHeaderText(null);
+        alert.setContentText("Un SMS de confirmation a été envoyé !");
+        alert.showAndWait();
+
+        phoneNumberField.clear();
+        messageField.clear();
+    }
+    private String generateConfirmationMessage() {
+        String message = "Votre réservation a été confirmée avec succès !\n\n";
+        message += "Date de début : " + dateDDP.getValue() + "\n";
+        message += "Date de fin : " + dateFDP.getValue() + "\n";
+        message += "Prix : " + prixTF.getText() + " €\n\n";
+        message += "Merci pour votre réservation !";
+        return message;
+    }
+
 
     @FXML
     private void manage(ActionEvent event) {
@@ -103,19 +164,23 @@ public class ManageController implements Initializable {
             bookingL.setDateD(dateDDP.getValue());
             bookingL.setDateF(dateFDP.getValue());
 
-
             String idRessText = idRess.getText();
             if (!idRessText.isEmpty()) {
                 try {
                     int lieub_id = Integer.parseInt(idRessText);
                     bookingL.setLieub_id(lieub_id);
 
-
                     if (currentBookingL == null) {
                         if (BookingLService.getInstance().add(bookingL)) {
+                            // Ajouter la réservation
                             AlertUtils.makeSuccessNotification("BookingL ajouté avec succès");
                             MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_DISPLAY_ALL_BOOKING_L);
                             closeWindow();
+
+                            // Envoyer le SMS de confirmation
+                            String userPhoneNumber = phoneNumberField.getText();
+                            String confirmationMessage = generateConfirmationMessage();
+                            sendSMS(userPhoneNumber, confirmationMessage);
                         } else {
                             AlertUtils.makeError("Erreur lors de l'ajout de BookingL");
                         }
@@ -137,6 +202,7 @@ public class ManageController implements Initializable {
             }
         }
     }
+
 
     public void initData(Lieu lieu) {
         // Afficher le nom du lieu dans le champ de texte
@@ -200,9 +266,6 @@ public class ManageController implements Initializable {
             float prixTotal = days * lieu.getPrix();
             prixTF.setText(String.valueOf(prixTotal));
         }
-
-
-
 
 
 }}

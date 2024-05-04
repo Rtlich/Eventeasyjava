@@ -33,8 +33,6 @@ public class ShowAllController implements Initializable {
     @FXML
     public Text topText;
     @FXML
-    public Button addButton;
-    @FXML
     public VBox mainVBox;
     @FXML
     private Label labelLieuName;

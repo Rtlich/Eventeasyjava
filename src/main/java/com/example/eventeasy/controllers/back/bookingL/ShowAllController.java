@@ -2,18 +2,26 @@ package com.example.eventeasy.controllers.back.bookingL;
 
 import com.example.eventeasy.controllers.back.MainWindowController;
 import com.example.eventeasy.entities.BookingL;
+import com.example.eventeasy.entities.Lieu;
 import com.example.eventeasy.services.BookingLService;
 import com.example.eventeasy.services.LieuService;
 import com.example.eventeasy.utils.AlertUtils;
 import com.example.eventeasy.utils.Constants;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +31,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.util.Duration;
 import java.util.*;
 
 public class ShowAllController implements Initializable {
@@ -31,12 +40,17 @@ public class ShowAllController implements Initializable {
 
     @FXML
     public Text topText;
-    @FXML
-    public Button addButton;
+
     @FXML
     public VBox mainVBox;
+
     @FXML
-    private Text statusText;
+    private VBox mostReservedDetailsVBox;
+    @FXML
+    private PieChart mostReservedPieChart;
+
+    @FXML
+    private BarChart<String, Integer> reservationChart;
 
     List<BookingL> listBookingL;
 
@@ -44,8 +58,48 @@ public class ShowAllController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         listBookingL = BookingLService.getInstance().getAll();
         displayData();
+        displayMostReservedLieu();
+
     }
 
+    private void displayMostReservedLieu() {
+        Lieu mostReservedLieu = LieuService.getInstance().getMostReservedLieu();
+
+        if (mostReservedLieu != null) {
+            Text lieuName = new Text(mostReservedLieu.getNom());
+            Text reservationCount = new Text("Nombre de réservations : " + mostReservedLieu.getReservationCount());
+
+            mostReservedDetailsVBox.getChildren().addAll(lieuName, reservationCount);
+
+            // Remplir le PieChart avec les détails du lieu le plus réservé
+            updatePieChartData(mostReservedLieu.getReservationCount(), mostReservedLieu.getCapacity() - mostReservedLieu.getReservationCount());
+
+            // Animer le PieChart
+            animatePieChart(mostReservedLieu.getReservationCount(), mostReservedLieu.getCapacity() - mostReservedLieu.getReservationCount());
+        } else {
+            Text noLieuText = new Text("Aucun lieu trouvé");
+            mostReservedDetailsVBox.getChildren().add(noLieuText);
+        }
+    }
+
+    private void updatePieChartData(double reservationCount, double availableCount) {
+        mostReservedPieChart.setData(FXCollections.observableArrayList(
+                new PieChart.Data("Réservations", reservationCount),
+                new PieChart.Data("Disponible", availableCount)
+        ));
+    }
+
+    private void animatePieChart(double reservationCount, double availableCount) {
+        Timeline timeline = new Timeline();
+        for (PieChart.Data data : mostReservedPieChart.getData()) {
+            KeyValue keyValue = new KeyValue(data.pieValueProperty(),
+                    data.getName().equals("Réservations") ? reservationCount : availableCount,
+                    Interpolator.EASE_BOTH);
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        timeline.play();
+    }
     void displayData() {
         mainVBox.getChildren().clear();
         Collections.reverse(listBookingL);

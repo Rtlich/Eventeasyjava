@@ -4,11 +4,8 @@ module com.example.eventeasy {
     requires java.sql;
     requires com.gluonhq.maps;
     requires com.calendarfx.view; // Ajout de la dépendance à CalendarFX
-
-
-
-
-
+    // Ajout du module Twilio
+    requires twilio;
 
 
     opens com.example.eventeasy to javafx.fxml;

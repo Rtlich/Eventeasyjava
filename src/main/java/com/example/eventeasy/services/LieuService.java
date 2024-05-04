@@ -227,6 +227,76 @@ public class LieuService {
         }
         return listLieu;
     }
+    public List<Lieu> filterByCategory(CategoryL category) {
+        List<Lieu> listLieu = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM `lieu` AS x " +
+                    "RIGHT JOIN `category_l` AS y1 ON x.category_id = y1.id " +
+                    "WHERE y1.id = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, category.getId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Lieu lieu = new Lieu();
+                lieu.setId(resultSet.getInt("id"));
+                lieu.setNom(resultSet.getString("nom"));
+                lieu.setPrix(resultSet.getFloat("prix"));
+                lieu.setImage(resultSet.getString("image"));
+                lieu.setDateD(resultSet.getDate("date_d") != null ? resultSet.getDate("date_d").toLocalDate() : null);
+                lieu.setDateF(resultSet.getDate("date_f") != null ? resultSet.getDate("date_f").toLocalDate() : null);
+                lieu.setCapacity(resultSet.getInt("capacity"));
+                lieu.setRegion(resultSet.getString("region"));
+
+                CategoryL categoryL = new CategoryL();
+                categoryL.setId(resultSet.getInt("y1.id"));
+                categoryL.setNom(resultSet.getString("y1.nom"));
+                lieu.setCategory(categoryL);
+
+                listLieu.add(lieu);
+            }
+        } catch (SQLException exception) {
+            System.out.println("Error (filterByCategory) lieu : " + exception.getMessage());
+        }
+        return listLieu;
+    }
+    public Lieu getMostReservedLieu() {
+        Lieu mostReservedLieu = null;
+        try {
+            String query = "SELECT l.id, l.nom, l.prix, l.image, l.date_d, l.date_f, l.capacity, l.region, l.category_id, COUNT(b.id) AS reservation_count " +
+                    "FROM lieu l " +
+                    "LEFT JOIN booking_l b ON l.id = b.lieub_id " +
+                    "GROUP BY l.id " +
+                    "ORDER BY reservation_count DESC " +
+                    "LIMIT 1";
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                mostReservedLieu = new Lieu();
+                mostReservedLieu.setId(resultSet.getInt("id"));
+                mostReservedLieu.setNom(resultSet.getString("nom"));
+                mostReservedLieu.setPrix(resultSet.getFloat("prix"));
+                mostReservedLieu.setImage(resultSet.getString("image"));
+                mostReservedLieu.setDateD(resultSet.getDate("date_d") != null ? resultSet.getDate("date_d").toLocalDate() : null);
+                mostReservedLieu.setDateF(resultSet.getDate("date_f") != null ? resultSet.getDate("date_f").toLocalDate() : null);
+                mostReservedLieu.setCapacity(resultSet.getInt("capacity"));
+                mostReservedLieu.setRegion(resultSet.getString("region"));
+
+                CategoryL category = new CategoryL();
+                category.setId(resultSet.getInt("category_id"));
+                mostReservedLieu.setCategory(category);
+
+                mostReservedLieu.setReservationCount(resultSet.getInt("reservation_count"));
+            }
+        } catch (SQLException exception) {
+            System.out.println("Error in getMostReservedLieu: " + exception.getMessage());
+        }
+        return mostReservedLieu;
+    }
+
+
+
 
 
 

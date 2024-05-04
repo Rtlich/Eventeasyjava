@@ -79,6 +79,11 @@
             </VBox>
 
         </HBox>
+        <TextField fx:id="phoneNumberField" promptText="Numéro de téléphone de l'utilisateur" />
+
+
+
+
 
 
     </VBox>

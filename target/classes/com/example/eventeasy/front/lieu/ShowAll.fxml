@@ -12,6 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="800.0" prefHeight="500.0" style="-fx-background-color: #EEEEEE;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.eventeasy.controllers.front.lieu.ShowAllController">
     <AnchorPane style="-fx-background-color: #F6BDB3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <StackPane prefHeight="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0">
@@ -25,6 +26,9 @@
            <children>
                <TextField fx:id="searchTextField" promptText="Rechercher par nom..." />
                <Button fx:id="searchButton" onAction="#searchLieux" text="Rechercher" />
+               <ComboBox fx:id="categoryComboBox" promptText="Sélectionner une catégorie..." />
+               <Button fx:id="filterButton" text="Filtrer" onAction="#filterLieux" />
+
            </children>
        </HBox>
     </AnchorPane>

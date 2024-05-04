@@ -2,6 +2,7 @@ package com.example.eventeasy.controllers.front.lieu;
 
 import com.example.eventeasy.controllers.front.MainWindowController;
 import com.example.eventeasy.controllers.front.bookingL.ManageController;
+import com.example.eventeasy.entities.CategoryL;
 import com.example.eventeasy.entities.Lieu;
 import com.example.eventeasy.services.LieuService;
 import com.example.eventeasy.utils.AlertUtils;
@@ -47,6 +48,8 @@ public class ShowAllController implements Initializable {
     public Label pageNumberLabel;
     @FXML
     private TextField searchTextField;
+    @FXML
+    private ComboBox<CategoryL> categoryComboBox;
 
 
 
@@ -59,8 +62,10 @@ public class ShowAllController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listLieu = LieuService.getInstance().getAll();
-
         displayData();
+        // Charger toutes les catégories dans le ComboBox
+        List<CategoryL> categories = LieuService.getInstance().getAllCategorys();
+        categoryComboBox.getItems().addAll(categories);
     }
 
     void displayData() {
@@ -174,6 +179,18 @@ public class ShowAllController implements Initializable {
         currentPage = 1;
         displayData();
     }
+    @FXML
+    private void filterLieux(ActionEvent event) {
+        CategoryL selectedCategory = categoryComboBox.getValue();
+        if (selectedCategory != null) {
+            listLieu = LieuService.getInstance().filterByCategory(selectedCategory);
+        } else {
+            listLieu = LieuService.getInstance().getAll();
+        }
+        currentPage = 1;
+        displayData();
+    }
+
 
     @FXML
     private void ajouterLieu(ActionEvent ignored) {

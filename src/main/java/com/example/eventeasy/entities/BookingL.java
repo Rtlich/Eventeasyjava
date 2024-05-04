@@ -96,6 +96,10 @@ public class BookingL {
             return "Lieu introuvable"; // Gérer le cas où le lieu n'est pas trouvé
         }
     }
+    public Lieu getLieu() {
+        LieuService lieuService = new LieuService();
+        return lieuService.getLieuById(lieub_id);
+    }
 
 
 }

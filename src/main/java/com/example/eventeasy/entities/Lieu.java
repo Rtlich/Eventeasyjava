@@ -16,6 +16,8 @@ public class Lieu {
 
     private double latitude;
     private double longitude;
+    private int reservationCount;
+
 
     private CategoryL category;
 
@@ -108,6 +110,13 @@ public class Lieu {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+    public int getReservationCount() {
+        return reservationCount;
+    }
+
+    public void setReservationCount(int reservationCount) {
+        this.reservationCount = reservationCount;
     }
 
 
