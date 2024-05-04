@@ -1,0 +1,198 @@
+/* ------------------- SHADOWS ----------------- */
+.window-shadow {
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, #555555, 25, 0, 0, 0);
+}
+
+.window-rounded {
+    -fx-background-radius: 5;
+}
+
+.border-rounded {
+    -fx-border-radius: 5;
+}
+
+/*
+.scroll-pane {
+    -fx-background-color: #F8F9FD;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #F8F9FD;
+}*/
+
+/* ------------------ BUTTONS ------------------ */
+.link-button {
+    -fx-background-color: white;
+    -fx-background-radius: 0px;
+}
+
+.link-button:hover {
+    -fx-background-color: #E5E5E5;
+}
+
+.close-button {
+    -fx-background-color: white;
+    -fx-background-radius: 0px;
+}
+
+.top-button {
+    -fx-background-radius: 10px;
+    -fx-background-color: #EEEEEE;
+}
+
+.top-button:hover {
+    -fx-background-color: #CCCCCC;
+}
+
+.top-button:pressed {
+    -fx-background-color: #AAAAAA;
+}
+
+.normal-button {
+    -fx-background-radius: 10px;
+    -fx-background-color: #DDDDDD;
+}
+
+.normal-button:hover {
+    -fx-background-color: #CCCCCC;
+}
+
+.normal-button:pressed {
+    -fx-background-color: #AAAAAA;
+}
+
+.bg-primary {
+    -fx-background-color: #F6BDB3;
+}
+
+.success-button {
+    -fx-background-color: #F6BDB3;
+    -fx-background-radius: 10px;
+}
+
+.success-button:hover {
+    -fx-background-color: #BA877F;
+}
+
+.danger-button {
+    -fx-background-color: #e43f52;
+    -fx-background-radius: 10px;
+}
+
+.danger-button:hover {
+    -fx-background-color: #c82333;
+}
+
+.light-button {
+    -fx-background-color: #f8f9fc;
+    -fx-background-radius: 10px;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.white-button {
+    -fx-background-radius: 10px;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-color: white;
+}
+
+.white-button:hover {
+    -fx-background-color: #F3F3F3;
+}
+
+.signup-button {
+    -fx-background-color: transparent;
+}
+
+.light-button:hover {
+    -fx-background-color: #e2e6ea;
+}
+
+.link-panel {
+    -fx-background-color: #FFFFFF;
+}
+
+.link-panel:hover {
+    -fx-background-color: #E5E5E5;
+    -fx-border-color: #8F8F8F;
+    -fx-border-width: 1px;
+}
+
+/* ------------------- FORMS ------------------- */
+.form-control {
+    -fx-background-radius: 8, 8, 8;
+    -fx-background-insets: 30, 30, 30;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 10;
+    -fx-text-box-border: transparent;
+}
+
+.form-control:focused {
+    -fx-border-color: #F6BDB3;
+}
+
+.form-control-white {
+    -fx-background-radius: 8, 8, 8;
+    -fx-background-insets: 1, 1, 1;
+    -fx-background-color: white;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 10;
+    -fx-text-box-border: white;
+}
+
+.form-control-white:focused {
+    -fx-border-color: #F6BDB3;
+}
+
+.search-bar {
+    -fx-text-box-border: #BDBFBF;
+    -fx-background-insets: 2, 2, 2;
+    -fx-background-radius: 0, 0, 0;
+}
+
+/* ------------------ BORDERS ------------------ */
+.border-gray {
+    -fx-border-color: #cccccc;
+}
+
+.border-dark {
+    -fx-border-color: #343a40;
+}
+
+.border-gray {
+    -fx-border-color: #cccccc;
+}
+
+.border-light {
+    -fx-border-color: #F8F9FD;
+}
+
+.border-white {
+    -fx-border-color: white;
+}
+
+/* ---------------- BACKGROUNDS ---------------- */
+
+.background-gray {
+    -fx-background-color: #cccccc;
+}
+
+.background-light {
+    -fx-background-color: #F8F9FD;
+}
+
+.background-blue {
+    -fx-background-color: #F6BDB3;
+}
+
+.background-dark {
+    -fx-background-color: #343a40;
+}
+
+.background-white {
+    -fx-background-color: white;
+}
