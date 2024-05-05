@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class MainApp extends Application {
 
+
     public static Stage mainStage;
     private static MainApp instance;
     private static User session;

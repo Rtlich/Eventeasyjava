@@ -9,5 +9,8 @@
         <module name="eventeasymaven" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eventeasy" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>
