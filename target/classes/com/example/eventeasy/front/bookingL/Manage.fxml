@@ -78,5 +78,5 @@
 
     </VBox>
     <Button fx:id="btnAjout" layoutX="265.0" layoutY="434.0" mnemonicParsing="false" onAction="#manage" prefHeight="51.0" prefWidth="150.0" styleClass="success-button" text="manipulation" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
-   <TextField fx:id="idRess" layoutX="22.0" layoutY="56.0" />
+   <TextField fx:id="idRess" layoutX="22.0" layoutY="56.0" style="visibility: false;" />
 </AnchorPane>

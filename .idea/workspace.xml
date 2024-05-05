@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -34,7 +34,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/USER/Desktop/workshoppidev3a54",
+    "last_opened_file_path": "C:/Users/USER/Downloads/eventeasy - lieu",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -49,11 +49,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\Desktop\eventeasy\src\main\resources\css" />
+      <recent name="C:\Users\USER\Desktop\eventeasy\src\main\resources\com\example\eventeasy\images" />
       <recent name="D:\Projects\JavaFX\eventeasy\src\main\resources\com\example\eventeasy" />
       <recent name="D:\Projects\JavaFX\eventeasy\src\main\resources\com\example\eventeasy\images" />
       <recent name="D:\Projects\JavaFX\eventeasy\src\main\resources\com\example\eventeasy\front\lieu" />
-      <recent name="D:\Projects\JavaFX\eventeasy\src\main\resources\com\example\eventeasy\front" />
-      <recent name="D:\Projects\JavaFX\eventeasy\src\main\resources\com\example\eventeasy\back" />
     </key>
   </component>
   <component name="RunManager">
@@ -95,7 +95,8 @@
       <workItem from="1713860580500" duration="802000" />
       <workItem from="1713861738387" duration="8835000" />
       <workItem from="1714420119534" duration="59621000" />
-      <workItem from="1714756422400" duration="38543000" />
+      <workItem from="1714756422400" duration="51942000" />
+      <workItem from="1714907177448" duration="11449000" />
     </task>
     <servers />
   </component>

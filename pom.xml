@@ -38,6 +38,7 @@
             <artifactId>maps</artifactId>
             <version>2.0.0-ea+6</version>
         </dependency>
+        
         <!-- Calendar -->
         <dependency>
             <groupId>com.calendarfx</groupId>

@@ -19,10 +19,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -50,15 +50,17 @@ public class ShowAllController implements Initializable {
     private PieChart mostReservedPieChart;
 
     @FXML
-    private BarChart<String, Integer> reservationChart;
+    private BarChart<String, Number> reservationChart;
 
     List<BookingL> listBookingL;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         listBookingL = BookingLService.getInstance().getAll();
         displayData();
         displayMostReservedLieu();
+
 
     }
 

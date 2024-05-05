@@ -9,6 +9,7 @@
 <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.eventeasy.controllers.front.lieu.Map">
    <children>
       <VBox fx:id="address" layoutX="67.0" layoutY="81.0" prefHeight="281.0" prefWidth="483.0" />
+      <Label fx:id="locationLabel" />
       <Label layoutX="261.0" layoutY="22.0" text="Maps">
          <font>
             <Font size="32.0" />

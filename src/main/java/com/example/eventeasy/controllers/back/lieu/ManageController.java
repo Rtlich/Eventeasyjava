@@ -13,16 +13,14 @@ import com.gluonhq.maps.MapView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.geometry.Point2D;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
@@ -31,7 +29,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.*;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class ManageController implements Initializable {
@@ -62,18 +59,20 @@ public class ManageController implements Initializable {
     @FXML
     public Text topText;
 
+    @FXML
+    private Label locationLabel;
 
     private MapView mapView;
-    private MapPoint selectedPoint;
+    private Circle marker;
 
     Lieu currentLieu;
     Path selectedImagePath;
-    boolean imageEdited;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-
+        // Initialiser la carte
+        mapView = createMapView();
+        map.getChildren().add(mapView);
 
         for (CategoryL category : LieuService.getInstance().getAllCategorys()) {
             categoryCB.getItems().add(category);
@@ -108,9 +107,34 @@ public class ManageController implements Initializable {
         }
     }
 
+    // Créer et configurer la carte
+    private MapView createMapView() {
+        mapView = new MapView();
+        mapView.setPrefSize(500, 400);
+        mapView.setZoom(15);
+
+        marker = new Circle(5, Color.RED);
+        mapView.addLayer(new CustomMapLayer(marker));
+
+        // Initialiser l'événement de clic sur la carte
+        mapView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            Point2D mouseCoords = new Point2D(event.getX(), event.getY());
+            MapPoint mapPoint = mapView.getMapPosition(event.getX(), event.getY());
+            updateMarkerPosition(mapPoint);
+        });
+
+        return mapView;
+    }
+
+    // Mettre à jour la position du marqueur sur la carte et afficher les coordonnées
+    private void updateMarkerPosition(MapPoint mapPoint) {
+        locationLabel.setText(String.format("Latitude: %f, Longitude: %f", mapPoint.getLatitude(), mapPoint.getLongitude()));
+        marker.setCenterX(mapPoint.getLongitude());
+        marker.setCenterY(mapPoint.getLatitude());
+    }
+
     @FXML
     private void manage(ActionEvent ignored) {
-
         if (controleDeSaisie()) {
             createImageFile();
             String imagePath = selectedImagePath.toString();
@@ -124,38 +148,34 @@ public class ManageController implements Initializable {
             lieu.setCapacity(Integer.parseInt(capacityTF.getText()));
             lieu.setRegion(regionTF.getText());
 
-            //lieu.setLongitude(selectedPoint.getLongitude());
-            //lieu.setLatitude(selectedPoint.getLatitude());
-
             lieu.setCategory(categoryCB.getValue());
+
+            // Mettre à jour les valeurs de latitude et de longitude
+            lieu.setLatitude(marker.getCenterY());
+            lieu.setLongitude(marker.getCenterX());
 
             if (currentLieu == null) {
                 if (LieuService.getInstance().add(lieu)) {
-                    AlertUtils.makeSuccessNotification("Lieu ajouté avec succés");
+                    AlertUtils.makeSuccessNotification("Lieu ajouté avec succès");
                     MainWindowController.getInstance().loadInterface(Constants.FXML_BACK_DISPLAY_ALL_LIEU);
                 } else {
-                    AlertUtils.makeError("Error");
+                    AlertUtils.makeError("Erreur lors de l'ajout du lieu");
                 }
             } else {
                 lieu.setId(currentLieu.getId());
                 if (LieuService.getInstance().edit(lieu)) {
-                    AlertUtils.makeSuccessNotification("Lieu modifié avec succés");
+                    AlertUtils.makeSuccessNotification("Lieu modifié avec succès");
                     ShowAllController.currentLieu = null;
                     MainWindowController.getInstance().loadInterface(Constants.FXML_BACK_DISPLAY_ALL_LIEU);
                 } else {
-                    AlertUtils.makeError("Error");
+                    AlertUtils.makeError("Erreur lors de la modification du lieu");
                 }
-            }
-
-            if (selectedImagePath != null) {
-                createImageFile();
             }
         }
     }
 
     @FXML
     public void chooseImage(ActionEvent ignored) {
-
         final FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(MainApp.mainStage);
         if (file != null) {
@@ -175,7 +195,6 @@ public class ManageController implements Initializable {
     }
 
     private boolean controleDeSaisie() {
-
         if (nomTF.getText().isEmpty()) {
             AlertUtils.makeInformation("Le nom ne doit pas être vide");
             return false;
@@ -249,7 +268,18 @@ public class ManageController implements Initializable {
         return true;
     }
 
+    private class CustomMapLayer extends MapLayer {
+        private Circle marker;
 
+        public CustomMapLayer(Circle marker) {
+            this.marker = marker;
+            getChildren().add(marker);
+        }
 
-
+        @Override
+        protected void layoutLayer() {
+            marker.setTranslateX(0);
+            marker.setTranslateY(0);
+        }
+    }
 }

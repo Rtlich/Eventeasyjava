@@ -45,6 +45,8 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button btnLieus;
+    @FXML
+    private Button btnCalendar;
 
 
     public static MainWindowController getInstance() {
@@ -75,6 +77,7 @@ public class MainWindowController implements Initializable {
         btnCategoryLs.setTextFill(COLOR_DARK);
 
         btnLieus.setTextFill(COLOR_DARK);
+        btnCalendar.setTextFill(COLOR_DARK);
 
 
         loadInterface(Constants.FXML_FRONT_HOME);
@@ -100,8 +103,8 @@ public class MainWindowController implements Initializable {
     private void afficherCalendar(ActionEvent ignored) {
         goToLink(Constants.FXML_FRONT_DISPLAY_ALL_CALENDAR);
 
-        btnCategoryLs.setTextFill(COLOR_PRIMARY);
-        Animations.animateButton(btnCategoryLs, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);}
+        btnCalendar.setTextFill(COLOR_PRIMARY);
+        Animations.animateButton(btnCalendar, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);}
 
     @FXML
     private void afficherLieus(ActionEvent ignored) {

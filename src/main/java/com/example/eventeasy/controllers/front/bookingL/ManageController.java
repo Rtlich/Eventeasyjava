@@ -8,8 +8,6 @@ import com.example.eventeasy.services.BookingLService;
 import com.example.eventeasy.services.LieuService;
 import com.example.eventeasy.utils.AlertUtils;
 import com.example.eventeasy.utils.Constants;
-import com.twilio.exception.ApiException;
-import com.twilio.rest.api.v2010.account.Application;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import javafx.event.ActionEvent;
@@ -24,6 +22,7 @@ import com.twilio.Twilio;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,13 +55,13 @@ public class ManageController implements Initializable {
 
 
     // Votre SID de compte Twilio
-    public static final String ACCOUNT_SID = "";
+    public static final String ACCOUNT_SID = "AC14fce1898408bc9e0b8442b01dadf23d";
 
     // Votre token d'authentification Twilio
-    public static final String AUTH_TOKEN = "";
+    public static final String AUTH_TOKEN = "527c46732bebd796e735382736082e2e";
 
     // Le numéro Twilio
-    public static final String TWILIO_NUMBER = "";
+    public static final String TWILIO_NUMBER = "+14436162814";
     @FXML
     private TextField phoneNumberField;
 
@@ -243,18 +242,36 @@ public class ManageController implements Initializable {
             return false;
         }
 
-        Lieu lieu = LieuService.getInstance().getLieuById(Integer.parseInt(idRess.getText()));
-        if (lieu != null &&
-                !dateDDP.getValue().isBefore(lieu.getDateD()) &&
-                !dateFDP.getValue().isBefore(dateDDP.getValue()) &&
-                !dateFDP.getValue().isAfter(lieu.getDateF())) {
-
-            return true;
-        } else {
-            AlertUtils.makeInformation("La réservation doit être dans l'intervalle de disponibilité du lieu et après la date d'aujourd'hui");
+        if (dateFDP.getValue().isBefore(dateDDP.getValue())) {
+            AlertUtils.makeInformation("La date de fin doit être après la date de début");
             return false;
         }
+
+        Lieu lieu = LieuService.getInstance().getLieuById(Integer.parseInt(idRess.getText()));
+        if (lieu != null) {
+            LocalDate startDate = dateDDP.getValue();
+            LocalDate endDate = dateFDP.getValue();
+
+            // Vérifier s'il existe une réservation pour le même lieu dans la période spécifiée
+            List<BookingL> existingBookings = BookingLService.getInstance().getBookingsForLieu(lieu.getId(), startDate, endDate);
+            if (!existingBookings.isEmpty()) {
+                AlertUtils.makeInformation("Le lieu est déjà réservé pour cette période");
+                return false;
+            }
+
+            // Vérifier la disponibilité du lieu pour la période spécifiée
+            if (startDate.isBefore(lieu.getDateD()) || endDate.isAfter(lieu.getDateF())) {
+                AlertUtils.makeInformation("La réservation doit être dans l'intervalle de disponibilité du lieu");
+                return false;
+            }
+        } else {
+            AlertUtils.makeInformation("Le lieu spécifié n'existe pas");
+            return false;
+        }
+
+        return true;
     }
+
 
     private void closeWindow() {
         Stage stage = (Stage) btnAjout.getScene().getWindow();

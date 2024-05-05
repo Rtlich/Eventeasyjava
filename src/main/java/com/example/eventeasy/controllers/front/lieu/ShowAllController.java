@@ -75,9 +75,6 @@ public class ShowAllController implements Initializable {
         int endIndex = Math.min(startIndex + itemsPerPage, listLieu.size());
         displayedLieux = listLieu.subList(startIndex, endIndex);
 
-
-        Collections.reverse(listLieu);
-
         if (!displayedLieux.isEmpty()) {
             for (Lieu lieu : displayedLieux) {
                 mainVBox.getChildren().add(makeLieuModel(lieu));
@@ -91,8 +88,8 @@ public class ShowAllController implements Initializable {
         }
 
         updatePaginationButtons();
-
     }
+
 
     public Parent makeLieuModel(
             Lieu lieu

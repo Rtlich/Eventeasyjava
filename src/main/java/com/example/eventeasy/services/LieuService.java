@@ -81,7 +81,6 @@ public class LieuService {
 
     public boolean add(Lieu lieu) {
 
-
         String request = "INSERT INTO `lieu`(`nom`, `prix`, `image`, `date_d`, `date_f`, `capacity`, `region`, `category_id`,`longitude`, `latitude`) VALUES(?, ?, ?, ?, ?, ?, ?, ?,?,?)" ;
 
         try {
@@ -100,7 +99,6 @@ public class LieuService {
             preparedStatement.setDouble(9, lieu.getLongitude());
             preparedStatement.setDouble(10, lieu.getLatitude());
 
-
             preparedStatement.executeUpdate();
             System.out.println("Lieu added");
             return true;
@@ -109,6 +107,7 @@ public class LieuService {
         }
         return false;
     }
+
 
     public boolean edit(Lieu lieu) {
 

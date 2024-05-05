@@ -42,6 +42,14 @@
                     <Cursor fx:constant="HAND" />
                 </cursor>
             </Button>
+         <Button fx:id="btnCalendar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#afficherCalendar" style="-fx-background-color: #BA877F;" text="Calendar" textFill="WHITE">
+            <font>
+               <Font name="Segoe UI Bold" size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
 
             <Button fx:id="btnCategoryLs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#afficherCategoryLs" text="Maps lieu" textFill="WHITE">
                 <HBox.margin>
@@ -54,14 +62,6 @@
                     <Cursor fx:constant="HAND" />
                 </cursor>
             </Button>
-         <Button fx:id="btnCalendar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#afficherCalendar" text="Calendar" textFill="WHITE">
-            <font>
-               <Font name="Segoe UI Bold" size="15.0" />
-            </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-         </Button>
 
         </HBox>
 
